@@ -42,15 +42,6 @@ def init_board(num_ladders, num_snakes):
     return board
 
 
-def str2int(input: str):
-    # Returns int represented by given str or None if the given str not formatted as float
-    try:
-        result = int(input)
-    except ValueError:
-        return None
-    return result
-
-
 def print_players(players, current):
     for i in range(len(players)):
         if i == current:
@@ -65,10 +56,9 @@ def main():
     num_snakes = 8
     board = init_board(num_ladder, num_snakes)
 
-    num_of_players = str2int(input("Enter number of players: "))
-    while not num_of_players:
-        num_of_players = str2int(
-            input("Enter number of players (numbers only): "))
+    num_of_players = input("Enter number of players: ")
+    while not num_of_players.isdigit():
+        num_of_players = input("Enter number of players (numbers only): ")
 
     players = [0]*num_of_players
 
