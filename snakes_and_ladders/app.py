@@ -60,6 +60,8 @@ def main():
     while not num_of_players.isdigit():
         num_of_players = input("Enter number of players (numbers only): ")
 
+    num_of_players=int(num_of_players)
+    
     players = [0]*num_of_players
 
     current = 0
@@ -67,12 +69,10 @@ def main():
     while True:
 
         print_players(players, current)
-        input()
+        input("\nPress any key to roll the dice\n")
         clear_screen()
         
         steps = random.randint(1, 6)
-
-        
         latest_location = players[current]
         players[current] += steps
 
