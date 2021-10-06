@@ -60,8 +60,8 @@ def main():
     while not num_of_players.isdigit():
         num_of_players = input("Enter number of players (numbers only): ")
 
-    num_of_players=int(num_of_players)
-    
+    num_of_players = int(num_of_players)
+
     players = [0]*num_of_players
 
     current = 0
@@ -70,15 +70,11 @@ def main():
 
     while players[current] != 99:
 
-
         print_players(players, current)
-        
+
         input("\nPress enter key to roll the dice\n")
 
         steps = random.randint(1, 6)
-        
-        
-
 
         latest_location = players[current]
         players[current] += steps
@@ -89,7 +85,7 @@ def main():
         elif players[current] > 99:
             players[current] = 198 - latest_location - steps
             players[current] += board[players[current]]
-        
+
         else:
             continue
 
@@ -101,8 +97,6 @@ def main():
     clear_screen()
     print_players(players, current)
     print(f'Player {current+1} won the game!')
-
-
 
 
 if __name__ == "__main__":
