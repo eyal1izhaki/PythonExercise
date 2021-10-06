@@ -70,7 +70,7 @@ Enter number between 1 to 4:
 
 
 def new_customer_page(customers):
-    # Printing the 'new customer' page to the user and adding it to the customers dict
+    # Printing the 'new customer' page to the user and adding the created customer to the customers dict
     clear_screen()
     customer_name = input('Enter customer name: ').lower()
     while (customer_name in customers.keys()) or customer_name == '':
@@ -81,7 +81,7 @@ def new_customer_page(customers):
 
 
 def new_register_page(registers):
-    # printing the 'new register' page to the user and adding it to the registers dict
+    # printing the 'new register' page to the user and adding the created register to the registers dict
     clear_screen()
     register_name = input('Enter register name: ').lower()
     while (register_name in registers.keys()) or register_name == '':
