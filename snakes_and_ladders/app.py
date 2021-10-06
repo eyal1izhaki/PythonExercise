@@ -66,34 +66,41 @@ def main():
 
     current = 0
 
-    while True:
+    clear_screen()
+
+    while players[current] != 99:
+
 
         print_players(players, current)
-        input("\nPress any key to roll the dice\n")
-        clear_screen()
         
+        input("\nPress enter key to roll the dice\n")
+
         steps = random.randint(1, 6)
+        
+        
+
+
         latest_location = players[current]
         players[current] += steps
 
         if players[current] < 99:
             players[current] += board[players[current]]
 
-        elif players[current] == 99:
-            clear_screen()
-            print_players(players, current)
-
-            print(f'Player {current+1} won the game!')
-            break
-
-        else:
+        elif players[current] > 99:
             players[current] = 198 - latest_location - steps
             players[current] += board[players[current]]
+        
+        else:
+            continue
 
         current += 1
 
         if current == num_of_players:
             current = 0
+
+    clear_screen()
+    print_players(players, current)
+    print(f'Player {current+1} won the game!')
 
 
 
