@@ -6,13 +6,13 @@ class Customer:
 
     def add_product(self, product):
 
-        if product not in self.shopping_list:
+        if product.name not in self.shopping_list.keys():
             self.shopping_list[product.name] = product
             self.total_cost += product.total_price
         else:
             self.shopping_list[product.name].quantity += product.quantity
             self.shopping_list[product.name].total_price += product.total_price
-            self.total_cost += self.shopping_list[product.name].total_price
+            self.total_cost += product.total_price
 
     def remove_product(self, name: str, quantity: int):
 
@@ -29,7 +29,7 @@ class Customer:
         
         return False
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         shopping_list_str = ''
         for key in self.shopping_list:
             shopping_list_str += str(self.shopping_list[key]) + '\n'

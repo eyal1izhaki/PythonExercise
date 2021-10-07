@@ -22,7 +22,7 @@ class Register:
             """
         )
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         sale_str = ''
         for customer in self.sales_list:
             sale_str += f"\n{customer}\t{str(self.sales_list[customer])}$"

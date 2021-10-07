@@ -5,5 +5,5 @@ class Product:
         self.quantity = quantity
         self.total_price = price*quantity
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"{self.name}\t\tx{self.quantity}\t* {self.price}$\t= {self.total_price}"
