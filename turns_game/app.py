@@ -55,7 +55,7 @@ def random_name():
              "The Brutal Berserker Lizard"
              "The Cold-Blooded Dire Leviathan"]
 
-    return names[random.randint(0, len(names)-1)]
+    return random.choice(names)
 
 
 def main():
@@ -77,13 +77,15 @@ def main():
             if action == Actions.LEVELUP:
                 print('Not enough coins!')
                 time.sleep(2)
-
-        monster.attack(hero)
+                continue
 
         if monster.hp == 0:
             print("You killed a monster! Ohh, there's another one coming!!")
             time.sleep(2)
             monster = Monster(random_name(), hero.level)
+            continue
+
+        monster.attack(hero)
 
     clear_screen()
     print('You lost the game :(')

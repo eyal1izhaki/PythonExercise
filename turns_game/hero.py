@@ -3,9 +3,9 @@ from config import EasyConfig as Config
 
 class Actions:
     ATTACK = 1
-    LEVELUP = 2
+    DEFENCE = 2
     HEAL = 3
-    DEFENCE = 4
+    LEVELUP = 4
 
 
 class Hero:
@@ -24,18 +24,22 @@ class Hero:
         self.is_defended = False
 
     def heal(self):
-        if self.hp+10*((1+self.inc_hp_damage)**(self.level-1))*self.heal_percent < 10*((1+self.inc_hp_damage)**(self.level-1)):
-            self.hp += 10*((1+self.inc_hp_damage) **
-                           (self.level-1))*self.heal_percent
-        else:
-            self.hp = 10*((1+self.inc_hp_damage)**(self.level-1))
+        max_hp = 10*((1+self.inc_hp_damage)**(self.level-1))
+
+        # if hero hp will be less then max_hp after heal, then add hp as should.
+        if self.hp + max_hp * self.heal_percent < max_hp:
+            self.hp += max_hp * self.heal_percent
+
+        else:  # hero hp more then max_hp
+            self.hp = max_hp
 
     def level_up(self):
 
-        if self.coins > self.level_up_cost*(self.level+1):
+        if self.coins >= self.level_up_cost*(self.level+1):
             self.level += 1
             self.damage += self.damage*self.inc_hp_damage
             self.hp = 10*((1+self.inc_hp_damage)**(self.level-1))
+            self.coins = 0
             return True
         return False
 
@@ -48,16 +52,16 @@ class Hero:
 
     def reduce_health(self, monster):
 
-        if not self.is_defended:
-            self.hp -= monster.damage
-            self.is_defended = False
-        else:
-            self.hp -= monster.damage*self.defense_percentages
+        # Calculating the damage that the monster can case to the hero
+        damage = monster.damage * \
+            (1 - (self.defense_percentages*int(self.is_defended)))
+
+        self.hp -= damage
 
         if self.hp < 0:
             self.hp = 0
 
-        return self.hp if self.hp > 0 else 0
+        return self.hp
 
     def choose_action(self, action, monster=None):
 
